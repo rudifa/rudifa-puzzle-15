@@ -17,3 +17,10 @@
 [Vite Getting Started](https://vitejs.dev/guide/)
 
 [Vite.js Tutorial – How to Install and Use Vite in Your Web Projects](https://www.freecodecamp.org/news/get-started-with-vite/)
+
+### TODO
+
+- minimal game model
+- plot 4x4 game board - use svg, perhaps with d3
+- add click detect
+- add button New Game
