@@ -21,6 +21,6 @@
 ### TODO
 
 - minimal game model
-- plot 4x4 game board - use svg, perhaps with d3
+- plot 4x4 game board - use svg, perhaps with d3? simply use buttons?
 - add click detect
 - add button New Game
