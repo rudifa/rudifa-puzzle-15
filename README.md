@@ -1,12 +1,12 @@
-# Starter template for simple Lit projects built with Vite and using decorators
+# A minimal Puzzle-15 implementation
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8d7f0c01-ce5b-4766-8474-61c733fa498a/deploy-status)](https://app.netlify.com/sites/vite-lit-v2-template/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f481f922-a81e-4a81-b922-9039b585588c/deploy-status)](https://app.netlify.com/sites/rudifa-puzzle-15/deploys)
 
 > Ready to run in dev mode, and to build and preview the site in a browser.
 
 > Configured to use decorators @customElement, @property, @state, e.t.c.
 
-> Created with `npm create vite@latest vite-app-lit -- --template lit` and expanded by [rudifa](https://github.com/rudifa).
+> Created from [rudifa vite-lit-v2-template](https://github.com/rudifa/vite-lit-v2-template).
 
 ### References:
 
