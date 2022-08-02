@@ -2,6 +2,7 @@
 
 import {html, css, LitElement} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
+import {Puzzle15Model} from './puzzle-15-model.js';
 
 /**
  * An example element.
@@ -39,10 +40,22 @@ export class Puzzle15 extends LitElement {
     [8, 9, 10, 11],
     [12, 13, 14, 15],
   ];
-  @state() squares2 = Array.from({length: 16}, (_, i) => i + 1); // 1..16
+  @state() model = new Puzzle15Model(16);
 
-  // Array.from({length: 10}, (_, i) => i + 1)
-  //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  showRow(rowIdx) {
+    let size = this.model.size;
+    let row = this.model.grid.slice(rowIdx * size, (rowIdx + 1) * size);
+    return html`<div>${row.map((i) => this.button(i))}</div>`;
+  }
+
+  showModel = () => {
+    let size = this.model.size;
+    let rows = [];
+    for (let i = 0; i < size; i++) {
+      rows.push(this.showRow(i));
+    }
+    return html`<div>${rows}</div>`;
+  };
 
   // id should define the position in grid
   // value displayed should be the value of the square
@@ -56,39 +69,16 @@ export class Puzzle15 extends LitElement {
     </button>`;
   };
 
-  //${this.squares[Math.floor(j / 4)][j % 4]}
-
-  line = (lineData) => {
-    return lineData.map((i) => html`${this.button(i)}`);
-  };
-
-  game = () => {
-    return this.squares.map((lineData) => {
-      //console.log(`lineData: ${lineData}`);
-      return html`<div>${this.line(lineData)}</div> `;
-    });
-  };
-
   render() {
-    // <button class="square-button"></button>
-    // <button class="square-button"></button>ß
-    //  console.log(this.squares);
-    //    console.log(this.line(this.squares[0]));
-
-    // ${this.squares.map(
-    //   (i) => html`<button class="square-button">${i}</button>`
-    // )}
-
-    // ${this.line(this.squares[0])}
-
     return html`
-      ${this.game()}
-
+      <br />
       <div>
-        <br />
         <button @click=${this._onClick} part="button">New Game</button>
+
+        <button @click=${this._onClick3} part="button">Test</button>
       </div>
-      <div>${this.button('test')}</div>
+      <br />
+      <div>${this.showModel()}</div>
     `;
   }
 
@@ -102,6 +92,9 @@ export class Puzzle15 extends LitElement {
 
   _onClick3 = (event) => {
     console.log(event.target);
+    this.model.swap(0, 1);
+    console.log(`model: ${this.model.grid}`);
+    this.requestUpdate();
   };
 }
 
