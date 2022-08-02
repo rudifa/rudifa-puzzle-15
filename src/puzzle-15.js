@@ -39,6 +39,10 @@ export class Puzzle15 extends LitElement {
     [8, 9, 10, 11],
     [12, 13, 14, 15],
   ];
+  @state() squares2 = Array.from({length: 16}, (_, i) => i + 1); // 1..16
+
+  // Array.from({length: 10}, (_, i) => i + 1)
+  //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   // id should define the position in grid
   // value displayed should be the value of the square
