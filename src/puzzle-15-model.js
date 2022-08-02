@@ -1,5 +1,5 @@
 // model
-class Puzzle15Model {
+export class Puzzle15Model {
   constructor(numberOfSquares) {
     let size = Math.floor(Math.sqrt(numberOfSquares));
     this.size = size;
@@ -30,12 +30,12 @@ class Puzzle15Model {
   }
 }
 
-console.log('test');
+// console.log('test');
 
-let model = new Puzzle15Model(16);
-console.log(model.grid);
-console.log(model.size);
-console.log(model.grid.length);
-console.log(model.grid[0]);
-model.swap(0, 1);
-console.log(model.grid);
+// let model = new Puzzle15Model(16);
+// console.log(model.grid);
+// console.log(model.size);
+// console.log(model.grid.length);
+// console.log(model.grid[0]);
+// model.swap(0, 1);
+// console.log(model.grid);
