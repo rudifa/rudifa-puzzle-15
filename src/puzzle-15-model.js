@@ -20,12 +20,21 @@ export class Puzzle15Model {
     this.grid[j] = temp;
   }
 
+  // makes random swaps, may end in an unsolvable state
   shuffle() {
     for (let i = 0; i < this.size * this.size; i++) {
       let j = Math.floor(Math.random() * this.size * this.size);
       let temp = this.grid[i];
       this.grid[i] = this.grid[j];
       this.grid[j] = temp;
+    }
+  }
+
+  // makes random moves but preserving the solvabilitsy of the puzzle
+  shuffle2() {
+    for (let i = 0; i < this.size * this.size * this.size; i++) {
+      let j = Math.floor(Math.random() * this.size * this.size);
+      this.move(j);
     }
   }
 
@@ -59,6 +68,15 @@ export class Puzzle15Model {
       neighbors.push(i + 1);
     }
     return neighbors;
+  }
+
+  isSolved() {
+    for (let i = 0; i < this.size * this.size; i++) {
+      if (this.grid[i] != i + 1) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 

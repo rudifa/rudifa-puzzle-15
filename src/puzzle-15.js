@@ -70,18 +70,21 @@ export class Puzzle15 extends LitElement {
     return html`
       <br />
       <div>
-        <button @click=${this._onClick} part="button">New Game</button>
-
-        <button @click=${this._onClick3} part="button">Test</button>
+        <button @click=${this._onClickNewGame} part="button">New Game</button>
+        <button part="button">${this.model.isSolved() ? 'Solved' : ' '}</button>
       </div>
       <br />
       <div>${this.showModel()}</div>
     `;
   }
 
-  _onClick(e) {
+  /* <button @click=${this._onClickTest} part="button">Test</button> */
+
+  _onClickNewGame(e) {
     this.count++;
     console.log(`_onClick`, e);
+    this.model.shuffle();
+    this.requestUpdate();
   }
 
   _onClickTile(e) {
@@ -90,15 +93,10 @@ export class Puzzle15 extends LitElement {
     this.requestUpdate();
   }
 
-  _onClick3 = (event) => {
+  _onClickTest = (event) => {
     console.log(event.target);
     this.model.swap(0, 1);
     console.log(`model: ${this.model.grid}`);
     this.requestUpdate();
   };
 }
-
-// TODO
-// OK change squares to 1-d array
-// OK button: display current value of squares (0-15)
-// model move

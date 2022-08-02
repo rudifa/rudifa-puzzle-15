@@ -18,9 +18,17 @@
 
 [Vite.js Tutorial – How to Install and Use Vite in Your Web Projects](https://www.freecodecamp.org/news/get-started-with-vite/)
 
-### TODO
+### DONE
 
 - minimal game model
-- plot 4x4 game board - use svg, perhaps with d3? simply use buttons?
+- plot 4x4 game board - use buttons
 - add click detect
 - add button New Game
+- separate Puzzle15Model
+- display current value of squares (0-15)
+- model move
+- detect final state
+
+### TODO
+
+- modify shuffle to preserve the solvable state
