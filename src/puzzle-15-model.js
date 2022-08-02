@@ -47,6 +47,13 @@ export class Puzzle15Model {
     }
   }
 
+  randomMove() {
+    let emptyIdx = this.findEmpty();
+    let neighbors = this.neighbors(emptyIdx);
+    let randomIdx = neighbors[Math.floor(Math.random() * neighbors.length)];
+    this.swap(emptyIdx, randomIdx);
+  }
+
   isEmpty(i) {
     return this.grid[i] == this.grid.length;
   }
@@ -83,7 +90,11 @@ export class Puzzle15Model {
   distance(i) {
     let row = Math.floor(i / this.size);
     let col = i % this.size;
-    return Math.abs(row - this.size - 1) + Math.abs(col - this.size - 1);
+    let value = this.grid[i] - 1; // values are 1-based
+    let valrow = Math.floor(value / this.size);
+    let valcol = value % this.size;
+    let dist = Math.abs(row - valrow) + Math.abs(col - valcol);
+    return dist;
   }
 
   totalDistance() {
@@ -102,18 +113,16 @@ export class Puzzle15Model {
     }
   }
 
-  // scramble() {
-  //   let emptyIdx = this.findEmpty();
-  //   let neightbors = this.neighbors(emptyIdx);
-  //   for neighbor of neightbors {
+  scramble(n) {
+    for (let i = 0; i < n; i++) {
+      this.randomMove();
+    }
+  }
 }
 
-// console.log('test');
-
-// let model = new Puzzle15Model(16);
-// console.log(model.grid);
-// console.log(model.size);
-// console.log(model.grid.length);
-// console.log(model.grid[0]);
-// model.swap(0, 1);
-// console.log(model.grid);
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}

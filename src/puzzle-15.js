@@ -83,7 +83,8 @@ export class Puzzle15 extends LitElement {
   _onClickNewGame(e) {
     this.count++;
     console.log(`_onClick`, e);
-    this.model.shuffle();
+    /* this.model.shuffle(); */
+    this.model.scramble(100);
     this.requestUpdate();
   }
 
@@ -95,8 +96,13 @@ export class Puzzle15 extends LitElement {
 
   _onClickTest = (event) => {
     console.log(event.target);
-    this.model.swap(0, 1);
-    console.log(`model: ${this.model.grid}`);
-    this.requestUpdate();
+    for (let i = 0; i < this.model.grid.length; i++) {
+      this.model.randomMove();
+
+      console.log(`model: ${this.model.grid}`);
+      this.requestUpdate();
+    }
   };
 }
+
+// TODO add randomMove(), test interactively
