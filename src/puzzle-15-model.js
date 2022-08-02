@@ -51,6 +51,7 @@ export class Puzzle15Model {
     return this.grid[i] == this.grid.length;
   }
 
+  // return the array of indices of neighbors of the given index
   neighbors(i) {
     let neighbors = [];
     let row = Math.floor(i / this.size);
@@ -67,7 +68,7 @@ export class Puzzle15Model {
     if (col < this.size - 1) {
       neighbors.push(i + 1);
     }
-    return neighbors;
+    return neighbors.sort((a, b) => a - b);
   }
 
   isSolved() {
@@ -78,6 +79,33 @@ export class Puzzle15Model {
     }
     return true;
   }
+
+  distance(i) {
+    let row = Math.floor(i / this.size);
+    let col = i % this.size;
+    return Math.abs(row - this.size - 1) + Math.abs(col - this.size - 1);
+  }
+
+  totalDistance() {
+    let total = 0;
+    for (let i = 0; i < this.size * this.size; i++) {
+      total += this.distance(i);
+    }
+    return total;
+  }
+
+  findEmpty() {
+    for (let i = 0; i < this.size * this.size; i++) {
+      if (this.isEmpty(i)) {
+        return i;
+      }
+    }
+  }
+
+  // scramble() {
+  //   let emptyIdx = this.findEmpty();
+  //   let neightbors = this.neighbors(emptyIdx);
+  //   for neighbor of neightbors {
 }
 
 // console.log('test');
