@@ -28,6 +28,38 @@ export class Puzzle15Model {
       this.grid[j] = temp;
     }
   }
+
+  move(i) {
+    for (const item of this.neighbors(i)) {
+      if (this.isEmpty(item)) {
+        this.swap(i, item);
+        return;
+      }
+    }
+  }
+
+  isEmpty(i) {
+    return this.grid[i] == this.grid.length;
+  }
+
+  neighbors(i) {
+    let neighbors = [];
+    let row = Math.floor(i / this.size);
+    let col = i % this.size;
+    if (row > 0) {
+      neighbors.push(i - this.size);
+    }
+    if (row < this.size - 1) {
+      neighbors.push(i + this.size);
+    }
+    if (col > 0) {
+      neighbors.push(i - 1);
+    }
+    if (col < this.size - 1) {
+      neighbors.push(i + 1);
+    }
+    return neighbors;
+  }
 }
 
 // console.log('test');

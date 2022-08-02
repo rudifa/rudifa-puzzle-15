@@ -22,31 +22,19 @@ export class Puzzle15 extends LitElement {
         font-size: 16px;
       }
       button {
-        font-size: 14px;
+        font-size: 24px;
       }
       .square-button {
-        height: 5rem;
-        width: 5rem;
-      }
+        height: 6rem;
+        width: 6rem;
     `;
   }
 
   //@internalProperty() name = 'World';
 
   @state() count = 0;
-  @state() squares = [
-    [0, 1, 2, 3],
-    [4, 5, 6, 7],
-    [8, 9, 10, 11],
-    [12, 13, 14, 15],
-  ];
-  @state() model = new Puzzle15Model(16);
 
-  showRow(rowIdx) {
-    let size = this.model.size;
-    let row = this.model.grid.slice(rowIdx * size, (rowIdx + 1) * size);
-    return html`<div>${row.map((i) => this.button(i))}</div>`;
-  }
+  @state() model = new Puzzle15Model(16);
 
   showModel = () => {
     let size = this.model.size;
@@ -57,15 +45,24 @@ export class Puzzle15 extends LitElement {
     return html`<div>${rows}</div>`;
   };
 
+  showRow(rowIdx) {
+    let size = this.model.size;
+    let row = this.model.grid.slice(rowIdx * size, (rowIdx + 1) * size);
+
+    return html`<div>
+      ${row.map((value, idx) => this.button(value, rowIdx * size + idx))}
+    </div>`;
+  }
+
   // id should define the position in grid
   // value displayed should be the value of the square
-  button = (i) => {
-    let j = parseInt(i);
+  button = (value, position) => {
+    let empty = value == this.model.grid.length;
     return html`<button
-      id="${i}"
+      id="${position}"
       class="square-button"
-      @click="${this._onClick2}">
-      ${i}
+      @click="${this._onClickTile}">
+      ${empty ? '·' : value}
     </button>`;
   };
 
@@ -86,8 +83,11 @@ export class Puzzle15 extends LitElement {
     this.count++;
     console.log(`_onClick`, e);
   }
-  _onClick2(e) {
+
+  _onClickTile(e) {
     console.log(`_onClick2`, e.target.id);
+    this.model.move(parseInt(e.target.id));
+    this.requestUpdate();
   }
 
   _onClick3 = (event) => {
@@ -98,5 +98,7 @@ export class Puzzle15 extends LitElement {
   };
 }
 
-// TODO change squares to 1-d array
-// button: display current value of squares (0-15)
+// TODO
+// OK change squares to 1-d array
+// OK button: display current value of squares (0-15)
+// model move
