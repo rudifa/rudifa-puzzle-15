@@ -20,6 +20,8 @@
 
 ### DONE
 
+- [deployed](https://rudifa-puzzle-15.netlify.app/)
+
 - minimal game model
 - plot 4x4 game board - use buttons
 - add click detect
@@ -28,4 +30,5 @@
 - display current value of squares (0-15)
 - model move
 - detect final state
-- modify shuffle to preserve the solvable state
+- modify scramble to preserve the solvable state
+- display total distance from solved state
