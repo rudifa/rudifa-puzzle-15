@@ -5,10 +5,7 @@ import {customElement, property, state} from 'lit/decorators.js';
 import {Puzzle15Model} from './puzzle-15-model.js';
 
 /**
- * An example element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
+ * Implementation of the Puzzle 15.
  */
 @customElement('puzzle-15')
 export class Puzzle15 extends LitElement {
@@ -38,10 +35,6 @@ export class Puzzle15 extends LitElement {
     `;
   }
 
-  //@internalProperty() name = 'World';
-
-  @state() count = 0;
-
   @state() model = new Puzzle15Model(16);
 
   showPuzzle = () => {
@@ -58,61 +51,65 @@ export class Puzzle15 extends LitElement {
     let row = this.model.grid.slice(rowIdx * size, (rowIdx + 1) * size);
 
     return html`<div>
-      ${row.map((value, idx) => this.button(value, rowIdx * size + idx))}
+      ${row.map((value, idx) => this.squareButton(value, rowIdx * size + idx))}
     </div>`;
   }
-
-  // id should define the position in grid
-  // value displayed should be the value of the square
-  button = (value, position) => {
-    let empty = value == this.model.grid.length;
-    return html`<button
-      id="${position}"
-      class=${empty ? 'empty square' : 'square'}
-      @click="${this._onClickTile}">
-      ${value}
-    </button>`;
-  };
 
   render() {
     return html`
       <div>
         <div>${this.showPuzzle()}</div>
         <br />
-        <button @click=${this._onClickNewGame} class="button">Scramble</button>
-        <button class=${this.model.isSolved() ? 'button' : 'button empty'}>
-          Solved!
-        </button>
+        ${this.newGameButton()} ${this.solvedButton()}
       </div>
       <br />
     `;
   }
 
-  /* <button @click=${this._onClickTest} part="button">Test</button> */
+  // id defines the position in grid
+  // value displayed is the value of the square
+  squareButton = (value, position) => {
+    let empty = value == this.model.grid.length;
+    return html`<button
+      id="${position}"
+      class=${empty ? 'empty square' : 'square'}
+      @click="${this._onClickSquare}">
+      ${value}
+    </button>`;
+  };
 
-  _onClickNewGame(e) {
-    this.count++;
-    console.log(`_onClick`, e);
-    /* this.model.shuffle(); */
-    this.model.scramble(100);
-    this.requestUpdate();
+  newGameButton() {
+    return html`<button @click=${this._onClickNewGame} class="button">
+      Scramble
+    </button>`;
   }
 
-  _onClickTile(e) {
+  solvedButton() {
+    let totalDistance = this.model.totalDistance();
+    return html`<button class="button">
+      ${totalDistance == 0 ? 'Solved!' : totalDistance}
+    </button>`;
+  }
+
+  _onClickSquare(e) {
     console.log(`_onClick2`, e.target.id);
     this.model.move(parseInt(e.target.id));
     this.requestUpdate();
   }
 
+  _onClickNewGame(e) {
+    console.log(`_onClick`, e);
+    this.model.scramble(200);
+    this.requestUpdate();
+  }
+
+  // for development only
   _onClickTest = (event) => {
     console.log(event.target);
     for (let i = 0; i < this.model.grid.length; i++) {
       this.model.randomMove();
-
       console.log(`model: ${this.model.grid}`);
       this.requestUpdate();
     }
   };
 }
-
-// TODO add randomMove(), test interactively

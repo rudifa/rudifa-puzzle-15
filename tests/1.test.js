@@ -8,7 +8,7 @@ test('should work as expected', () => {
 });
 
 test('create a model instance', () => {
-  let model = new Puzzle15Model(16);
+  let model = new Puzzle15Model(); // create a default 4x4 grid
   expect(model.grid.length).toBe(16);
   expect(model.grid[0]).toBe(1);
   expect(model.grid[1]).toBe(2);
@@ -19,7 +19,7 @@ test('create a model instance', () => {
 });
 
 test('neighbors', () => {
-  let model = new Puzzle15Model(16);
+  let model = new Puzzle15Model(16); // create a 4x4 grid
   expect(model.neighbors(0)).toEqual([1, 4]);
   expect(model.neighbors(1)).toEqual([0, 2, 5]);
   expect(model.neighbors(2)).toEqual([1, 3, 6]);
