@@ -21,12 +21,20 @@ export class Puzzle15 extends LitElement {
         max-width: 800px;
         font-size: 16px;
       }
-      button {
-        font-size: 24px;
+      .button {
+        font-size: 20px;
+        min-width: 11.8rem;
       }
-      .square-button {
+      .square {
         height: 6rem;
         width: 6rem;
+        font-size: 24px;
+        border-radius: 5px;
+      }
+      .empty {
+        color: #00000000;
+        background-color: #00000000;
+      }
     `;
   }
 
@@ -36,7 +44,7 @@ export class Puzzle15 extends LitElement {
 
   @state() model = new Puzzle15Model(16);
 
-  showModel = () => {
+  showPuzzle = () => {
     let size = this.model.size;
     let rows = [];
     for (let i = 0; i < size; i++) {
@@ -60,21 +68,23 @@ export class Puzzle15 extends LitElement {
     let empty = value == this.model.grid.length;
     return html`<button
       id="${position}"
-      class="square-button"
+      class=${empty ? 'empty square' : 'square'}
       @click="${this._onClickTile}">
-      ${empty ? '·' : value}
+      ${value}
     </button>`;
   };
 
   render() {
     return html`
-      <br />
       <div>
-        <button @click=${this._onClickNewGame} part="button">New Game</button>
-        <button part="button">${this.model.isSolved() ? 'Solved' : ' '}</button>
+        <div>${this.showPuzzle()}</div>
+        <br />
+        <button @click=${this._onClickNewGame} class="button">Scramble</button>
+        <button class=${this.model.isSolved() ? 'button' : 'button empty'}>
+          Solved!
+        </button>
       </div>
       <br />
-      <div>${this.showModel()}</div>
     `;
   }
 
