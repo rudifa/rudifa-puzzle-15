@@ -118,6 +118,14 @@ export class Puzzle15Model {
       this.randomMove();
     }
   }
+
+  toJson() {
+    return JSON.stringify(this.grid);
+  }
+
+  fromJson(json) {
+    this.grid = JSON.parse(json);
+  }
 }
 
 function shuffle(array) {
