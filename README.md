@@ -28,7 +28,4 @@
 - display current value of squares (0-15)
 - model move
 - detect final state
-
-### TODO
-
 - modify shuffle to preserve the solvable state
