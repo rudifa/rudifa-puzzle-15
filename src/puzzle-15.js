@@ -25,8 +25,20 @@ export class Puzzle15 extends LitElement {
       .square {
         height: 6rem;
         width: 6rem;
-        font-size: 24px;
+        font-size: 28px;
         border-radius: 5px;
+      }
+      @media screen and (max-width: 640px) {
+        .button {
+          font-size: 20px;
+          min-width: 9.7rem;
+        }
+        .square {
+          height: 5rem;
+          width: 5rem;
+          font-size: 28px;
+          border-radius: 5px;
+        }
       }
       .empty {
         color: #00000000;
