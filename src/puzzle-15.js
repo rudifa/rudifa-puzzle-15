@@ -129,7 +129,7 @@ export class Puzzle15 extends LitElement {
   };
 
   play() {
-    const audio = new Audio('sounds/cymbal.wav');
+    const audio = new Audio('/cymbal.wav');
     audio.play();
   }
 }
