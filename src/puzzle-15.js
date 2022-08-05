@@ -1,7 +1,7 @@
 /** @prettier */
 
 import {html, css, LitElement} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 import {Puzzle15Model} from './puzzle-15-model.js';
 
 /**
@@ -99,7 +99,7 @@ export class Puzzle15 extends LitElement {
   solvedButton() {
     let totalDistance = this.model.totalDistance();
     return html`<button class="button">
-      ${totalDistance == 0 ? 'Solved!' : totalDistance}
+      ${this.model.isSolved() ? 'Solved!' : totalDistance}
     </button>`;
   }
 
@@ -107,6 +107,9 @@ export class Puzzle15 extends LitElement {
     console.log(`_onClick2`, e.target.id);
     this.model.move(parseInt(e.target.id));
     this.requestUpdate();
+    if (this.model.isSolved()) {
+      this.play();
+    }
   }
 
   _onClickNewGame(e) {
@@ -118,10 +121,15 @@ export class Puzzle15 extends LitElement {
   // for development only
   _onClickTest = (event) => {
     console.log(event.target);
-    for (let i = 0; i < this.model.grid.length; i++) {
+    for (_ of this.model.grid) {
       this.model.randomMove();
       console.log(`model: ${this.model.grid}`);
       this.requestUpdate();
     }
   };
+
+  play() {
+    const audio = new Audio('sounds/cymbal.wav');
+    audio.play();
+  }
 }
