@@ -79,12 +79,7 @@ export class Puzzle15Model {
 
   // return true if all values are in their initial positions
   isSolved() {
-    for (let i = 0; i < this.size * this.size; i++) {
-      if (this.grid[i] != i + 1) {
-        return false;
-      }
-    }
-    return true;
+    return this.totalDistance() == 0;
   }
 
   // the distance between the current position and the initial position
@@ -92,8 +87,7 @@ export class Puzzle15Model {
     let [row, col] = this.rowCol(i);
     let val0 = this.grid[i] - 1; // values are 1-based
     let [valrow, valcol] = this.rowCol(val0);
-    let dist = Math.abs(row - valrow) + Math.abs(col - valcol);
-    return dist;
+    return Math.abs(row - valrow) + Math.abs(col - valcol);
   }
 
   // the sum of distances of all nonempty squares from their initial positions
