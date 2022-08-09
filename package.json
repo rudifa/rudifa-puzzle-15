@@ -17,6 +17,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "gun": "^0.2020.1237",
     "lit": "^2.0.2"
   },
   "devDependencies": {
