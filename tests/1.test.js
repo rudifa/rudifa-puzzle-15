@@ -13,7 +13,7 @@ test('create a model instance', () => {
   expect(model.grid[0]).toBe(1);
   expect(model.grid[1]).toBe(2);
   expect(model.grid[2]).toBe(3);
-  model.swap(0, 1);
+  model._swap(0, 1);
   expect(model.grid[0]).toBe(2);
   expect(model.grid[1]).toBe(1);
 });
@@ -63,8 +63,8 @@ test('scramble', () => {
   let total1 = model.totalDistance();
   // console.log(`model.grid: ${model.grid} total1: ${total1}`);
   expect(total1).toBe(0);
-  model.swap(2, 1);
-  model.swap(3, 7);
+  model._swap(2, 1);
+  model._swap(3, 7);
   model.scramble(30);
   let total2 = model.totalDistance();
   expect(total1).toBeLessThan(total2);

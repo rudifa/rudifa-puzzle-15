@@ -26,15 +26,15 @@ export class Puzzle15Model {
     }
   }
 
-  swap(i, j) {
+  _swap(i, j) {
     [this.grid[i], this.grid[j]] = [this.grid[j], this.grid[i]];
   }
 
   // move the square to the neighbouring empty position (if any)
   move(i) {
     for (const item of this.neighbors(i)) {
-      if (this.isEmpty(item)) {
-        this.swap(i, item);
+      if (this._isEmpty(item)) {
+        this._swap(i, item);
         return;
       }
     }
@@ -45,11 +45,11 @@ export class Puzzle15Model {
     let emptyIdx = this.findEmpty();
     let neighbors = this.neighbors(emptyIdx);
     let randomIdx = neighbors[Math.floor(Math.random() * neighbors.length)];
-    this.swap(emptyIdx, randomIdx);
+    this._swap(emptyIdx, randomIdx);
   }
 
   // return true if the empty square is at position i
-  isEmpty(i) {
+  _isEmpty(i) {
     return this.grid[i] == this.grid.length;
   }
 
@@ -94,7 +94,7 @@ export class Puzzle15Model {
   totalDistance() {
     let total = 0;
     for (let i = 0; i < this.size * this.size; i++) {
-      if (!this.isEmpty(i)) {
+      if (!this._isEmpty(i)) {
         total += this.distance(i);
       }
     }
@@ -104,7 +104,7 @@ export class Puzzle15Model {
   // return the index of the empty square
   findEmpty() {
     for (let i = 0; i < this.size * this.size; i++) {
-      if (this.isEmpty(i)) {
+      if (this._isEmpty(i)) {
         return i;
       }
     }
@@ -125,13 +125,5 @@ export class Puzzle15Model {
   // initialize the puzzle from a string representation
   fromJson(json) {
     this.grid = JSON.parse(json);
-  }
-}
-
-// Fisher–Yates shuffle
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
   }
 }

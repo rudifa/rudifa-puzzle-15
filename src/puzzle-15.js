@@ -3,6 +3,7 @@
 import {html, css, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Puzzle15Model} from './puzzle-15-model.js';
+import {GunController} from './gun-controller.js';
 
 /**
  * Implementation of the Puzzle 15.
@@ -48,6 +49,14 @@ export class Puzzle15 extends LitElement {
   }
 
   @state() model = new Puzzle15Model(16);
+
+  // Create the controller and store it
+  gunController = new GunController(this);
+
+  newGrid(gridJson) {
+    this.model.fromJson(gridJson);
+    this.requestUpdate();
+  }
 
   showPuzzle = () => {
     let size = this.model.size;
@@ -106,6 +115,7 @@ export class Puzzle15 extends LitElement {
   _onClickSquare(e) {
     console.log(`_onClick2`, e.target.id);
     this.model.move(parseInt(e.target.id));
+    this.gunController.sendGrid(this.model.toJson());
     this.requestUpdate();
     if (this.model.isSolved()) {
       this.play();
@@ -115,6 +125,7 @@ export class Puzzle15 extends LitElement {
   _onClickNewGame(e) {
     console.log(`_onClick`, e);
     this.model.scramble(200);
+    this.gunController.sendGrid(this.model.toJson());
     this.requestUpdate();
   }
 
@@ -129,7 +140,7 @@ export class Puzzle15 extends LitElement {
   };
 
   play() {
-    const audio = new Audio('/cymbal.wav');
+    const audio = new Audio('/tom3.wav');
     audio.play();
   }
 }
