@@ -18,6 +18,8 @@
 
 [Vite.js Tutorial – How to Install and Use Vite in Your Web Projects](https://www.freecodecamp.org/news/get-started-with-vite/)
 
+[GUN docs](https://gun.eco/docs/API)
+
 ### DONE
 
 - [deployed](https://rudifa-puzzle-15.netlify.app/)
@@ -32,3 +34,4 @@
 - detect final state
 - modify scramble to preserve the solvable state
 - display total distance from solved state
+- added game state sharing (p2p using gun)
