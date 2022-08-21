@@ -1,17 +1,15 @@
-import gun from 'gun';
-
-const db = gun([
-  'http://localhost:8765/gun',
-  'https://gun-manhattan.herokuapp.com/gun',
-]);
+import gunSingleton from './gun-singleton';
 
 export class GunController {
   host;
   p2pdb;
+  db;
 
   constructor(host) {
     this.host = host;
-    this.p2pdb = db.get('puzzle-15').get('grid-object');
+    this.db = gunSingleton.db();
+
+    this.p2pdb = this.db.get('puzzle-15').get('grid-object');
     this.p2pdb.on((wrapped) => {
       console.log(`p2pdb.on`, this._unwrap(wrapped, 'grid'));
       this.host.newGrid(this._unwrap(wrapped, 'grid'));

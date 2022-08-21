@@ -34,4 +34,6 @@
 - detect final state
 - modify scramble to preserve the solvable state
 - display total distance from solved state
-- added game state sharing (p2p using gun)
+- add game state sharing (p2p using gun)
+- add gun-singleton
+
